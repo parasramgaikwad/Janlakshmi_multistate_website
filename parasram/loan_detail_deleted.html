@@ -1,0 +1,95 @@
+<div class="col-12 col-md-4 Enquire_form">
+    <div class="bg-white mt-5 text-dark text-center p-4 rounded box_shodow">
+        <form action="/loan_enquiry" onSubmit="return valid_datas( this );" method="post">
+            <input type="hidden" name="loan_type_id" value="<%= loan_details.loan_type_id %>">
+            <input type="hidden" name="loan_name" value="<%= loan_details.loan_name %>">
+            <h1>Enquire Now</h1>
+            <div class="form-floating ">
+                <input type="text" class="form-control w-75 mx-auto p-2" name="enquirers_name" id="floatingInput" placeholder="Name">
+                <label for="floatingInput" class=" w-75 mx-auto ms-5  ">Name</label>
+            </div>
+            <div class="form-floating ">
+                <input type="email" class="form-control w-75 mx-auto p-2" name="enquirers_email" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput" class=" w-75 mx-auto ms-5  ">Email</label>
+            </div>
+            <div class="form-floating ">
+                <input type="number" class="form-control w-75 mx-auto p-2" name="enquirers_mobile" id="floatingInput" placeholder="Phone">
+                <label for="floatingInput" class=" w-75 mx-auto ms-5  ">Phone</label>
+            </div>
+            <div class="form-floating ">
+                <input type="text" class="form-control w-75 mx-auto p-2" name="enquirers_city" id="floatingInput" placeholder="City/village">
+                <label for="floatingInput" class=" w-75 mx-auto ms-5  ">City/village</label>
+            </div>
+            <div class="form-floating w-75 mx-auto mt-3">
+                <textarea class="form-control p-4" id="floatingInput" name="enquirers_message" placeholder="Message" style="height: 120px;"></textarea>
+                <label for="floatingInput" >Message</label>
+            </div>
+
+            <button class="btn btn-warning form-control w-75 mx-auto mt-3 pb-3">Send Now</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="col-12 col-md-8 mx-auto mt-5 bg-white Enquire_form">
+    <!-- Button Section -->
+    <h1 class="mt-3 ms-3 text_box_family" id="text_box_family"><%= loan_details.loan_name %></h1>
+                <p id="text_box_family" class="ms-3"><%= loan_details.loan_description %></p>
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active custom-span" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"> <i class="bi bi-file-earmark"></i> Documents</button>
+            <button class="nav-link custom-span" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="bi bi-exclamation-circle"></i> % Interest rate</button>
+            <button class="nav-link custom-span" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false"><i class="bi bi-hourglass-split"></i> Application Process</button>
+            <button class="nav-link custom-span" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false"> <i class="bi bi-lightning-charge-fill"></i> Feature</button>
+        </div>
+    </nav>
+
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+            <div style="border: 1px solid black;" class="mt-5 pb-2 pt-2">
+                <% for(var i=0;i<loan_docs1.length;i++) { %>
+                    <ul class="ml-3 mb-0">
+                       <li><%= loan_docs1[i].loan_documents %></li>
+                    </ul>
+                    <% } %>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+            <div style="border: 1px solid black; width: 100%;" class="mt-5">
+                <p class="text-center fw-bold text-warning mt-5">
+                    Attractive Interest Rates at 6% per annum
+                </p>
+                <table class="table table-bordered table-hover table-striped mt-3 w-75 mx-auto">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="p-3 text-center">Day/Month</th>
+                            <th class="p-3 text-center">Interest Rate (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-warning">
+                            <td class="p-3 text-center"><%= loan_details.loan_tenure %></td>
+                            <td class="p-3 text-center"><%= loan_details.loan_intrest_rate %></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+            <div style="border: 1px solid black;" class="mt-5 pb-2 pt-2">
+                <% for(var i=0;i<loan_docs2.length;i++) { %>
+                <ul class="ml-3 mb-0">
+                   <li><%= loan_docs2[i].loan_application %></li>
+                </ul>
+                <% } %>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+            <div style="border:1px solid black;" class="mt-5">
+                <p class="mt-5 mb-5 ms-3"><%= loan_details.loan_feature %></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<%- include("navbar.ejs") %>
+<form action="/admin/save_home_facility" enctype="multipart/form-data" method="post">
+    <div class="container-fluid bg-white p-4">
+        <div class="row">
+            <div class="mb-3 col-md-12 text-center">
+                <h3>Add Home Facilitis</h3>
+            </div>
+            
+            <div class="mb-3 col-md-8">
+                Facility Heading
+                <input type="text" name="facility_header" value="" required   class="form-control">
+            </div>
+            <div class="mb-3 col-md-6">
+                Facility Detail
+                <textarea name="facility_detail" value="" required   class="form-control" style="height: 150px;"></textarea>
+            </div>
+            <div class="mb-3 col-md-6">
+                Facility Image
+                <input type="file" name="facility_image" value="" required   class="form-control">
+            </div>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary btn-lg">Save </button>
+            </div>
+        </div>
+    </div>
+</form>
+<br> <hr>
+
+
+<div class="container-fluid bg-white p-4">
+    <div class="row">
+        <div class="mb-3 col-md-12 text-center">
+          <h3>Home Facility List</h3>
+        </div>
+        <div class="mb-3 col-md-12"> 
+            <div class="table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+
+            <table class="table table-bordered table-stripped table-hover">
+            <tr>
+                <th style="width: 15%;" >Action</th>
+                <th>Sr</th>
+                <th>Facility Heading</th>
+                <th>Facility Detail</th>
+                <th>Facility Image</th>
+            </tr>
+            <% for(var i=0;i<facilities.length;i++) { %>
+                <tr>
+                    <td>
+                        <button class="btn btn-primary" onclick="confirmEdit('<%-facilities[i].home_facility_id%>')" aria-label="Delete enquiry">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="confirmDelete('<%-facilities[i].home_facility_id%>')" aria-label="Delete enquiry">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <!-- <a href="edit_home_facility/<%-facilities[i].home_facility_id%>" >
+                            <button class="btn btn-primary" onclick="alert('Are You Sure....?')">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </a>
+                        <a href="delete_home_facility/<%-facilities[i].home_facility_id%>" >
+                            <button class="btn btn-danger" onclick="alert('Are You Sure....?')">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </a> -->
+                    </td>
+                    <td><%- i+1 %></td>
+                    <td><%-facilities[i].facility_header%></td>
+                    <td><%-facilities[i].facility_detail%></td>
+                    <td>
+                        <img src="/uploads/<%-facilities[i].facility_image%>" style="height: 100px;width: 200px;">
+                    </td>
+
+                </tr>
+            <% } %>
+            
+            </table>
+            <script>
+                function confirmDelete(enquiryId) {
+                    // Display a confirmation dialog
+                    var result = confirm("Are you sure you want to delete ?");
+                    
+                    if (result) {
+                        // If the user clicks "OK", redirect to the delete URL
+                        window.location.href = 'delete_home_facility/' + enquiryId;
+                    } else {
+                        // If the user clicks "Cancel", do nothing (dialog closes)
+                        return false;
+                    }
+                }
+                function confirmEdit(enquiryId) {
+                    // Display a confirmation dialog
+                    var result = confirm("Are you sure you want to Edit ?");
+                    
+                    if (result) {
+                        // If the user clicks "OK", redirect to the delete URL
+                        window.location.href = 'edit_home_facility/' + enquiryId;
+                    } else {
+                        // If the user clicks "Cancel", do nothing (dialog closes)
+                        return false;
+                    }
+                }
+            </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<%- include("footer.ejs") %>

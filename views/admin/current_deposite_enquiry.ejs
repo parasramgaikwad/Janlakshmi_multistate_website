@@ -1,0 +1,79 @@
+<%- include('navbar.ejs') %>
+
+
+
+
+
+<div id="content" class="container-fluid bg-white p-4">
+    <div class="row">
+        <div class="container mt-5 mb-3">
+            <h2>Export and Print Page</h2>
+            <button class="btn btn-success btn-sm" onclick="downloadCSV()">Download CSV</button>
+            <button class="btn btn-warning btn-sm" onclick="printPage()">Print Page</button>
+        <a href="completed_deposit_enquiry"><button class="btn btn-sm btn-danger">Completed Enquiries</button></a>
+
+        </div>
+        <div class="col-md-12">
+            <h3 style="text-align: center;">Current Deposit Scheme Enquiry</h3>
+            <br>
+        </div>
+        <div class="col-md-12">
+            <div class="table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+
+            <table class="table table-sm table-bordered">
+                <tr>
+                    <th>Action</th>
+                    <th>SN</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile No</th>
+                    <th>City</th>
+                    <th>Message</th>
+
+                </tr>
+                <% for(i=0;i<current_deposit_enquiry.length;i++) { %>
+
+                    <tr>
+                        
+                        <td>
+                            <a href="complete_deposit_enquiry/<%-current_deposit_enquiry[i].current_deposit_enquiry_id%>">
+                                <button class="btn btn-primary">Complete</button>
+                            </a>
+                        </td>
+                       
+                        <td><%-i+1%></td>
+                        <td><%-current_deposit_enquiry[i].current_enquiry_name%></td>
+                        <td><%-current_deposit_enquiry[i].current_enquiry_email%></td>
+                        <td><%-current_deposit_enquiry[i].current_enquiry_mobile%></td>
+                        <td><%-current_deposit_enquiry[i].current_enquiry_city%></td>
+                        <td><%-current_deposit_enquiry[i].current_enquiry_message%></td>
+
+                    </tr>
+                <% } %>
+            </table>
+            
+            </div>
+            <div class="col-md-12 mt-5">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                       
+                        <% for(var i=1; i<=total_pages; i++) { %>
+    
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/current_deposite_enquiry?page_no=<%=i%>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                            <% } %>
+    
+                                
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include('footer.ejs') %>
+

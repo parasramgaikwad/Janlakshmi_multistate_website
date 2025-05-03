@@ -1,0 +1,87 @@
+<%- include("navbar.ejs") %>
+
+
+
+
+<div id="content" class="container-fluid bg-white p-4">
+    <div class="container mt-2 mb-3">
+        <h4>Export and Print Page</h4>
+        <button class="btn btn-sm btn-success" onclick="downloadCSV()">Download CSV</button>
+        <button class="btn btn-sm btn-warning" onclick="printPage()">Print Page</button>
+        <a href="/admin/completed_home_enquiry"><button class="btn btn-sm btn-danger">Completed Enquiries</button></a>
+
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-12 text-center">
+            <h3>Home Page Incomplete Enquiry List</h3>
+        </div>
+        <div class="mb-3 col-md-12"> 
+            <!-- Custom table wrapper for overflow -->
+            <div class="table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+                <table class="table table-bordered table-stripped table-hover">
+                    <tr>
+                        <th>action</th>
+                        <th>Sr</th>
+                        <th>Enquiry Type</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </tr>
+                    <% for(var i=0;i<enquirys.length;i++) { %>
+                        <tr>
+                            <td>
+                                <a href="complete_enquiry/<%-enquirys[i].enquiry_id%>">
+                                    <button class="btn btn-primary">Complete</button>
+                                </a>
+                            </td>
+                            <th><%-i+1%></th>
+                            <th><%- enquirys[i].enquiry_type%></th>
+                            <th><%- enquirys[i].name_of_enquired%></th>
+                            <th><%- enquirys[i].mobile_of_enquired%></th>
+                            <th><%- enquirys[i].email_of_enquired%></th>
+                            <th>
+                                <%- enquirys[i].currentdate%><br>
+                            </th>
+                            <th><%- enquirys[i].currenttime%></th>
+                        </tr>
+                    <% } %>
+                </table>
+            </div>
+
+            <div class="col-md-12 mt-5">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                       
+                        <% for(var i=1; i<=total_pages; i++) { %>
+    
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/enquiry?page_no=<%=i%>">
+                                    <%= i %>
+                                </a>
+                            </li>
+                            <% } %>
+    
+                                
+                    </ul>
+                </nav>
+            </div>
+
+
+            
+        </div>
+    </div>
+</div>
+<hr>
+
+
+
+
+<%- include("footer.ejs") %>
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+<%- include("navbar.ejs") %>
+
+
+<div id="content" class="container-fluid bg-white p-4">
+    <div class="row">
+        <!-- <div class="container mt-5 mb-3">
+            <h4>Export and Print Page</h4>
+            <button class="btn btn-sm btn-success" onclick="downloadCSV()">Download CSV</button>
+            <button class="btn btn-sm btn-warning" onclick="printPage()">Print Page</button>
+        </div> -->
+        <div class="mb-3 col-md-12 text-center">
+            <h3><a style="float: left;" href="/admin/service_enquiry"><button class="btn btn-dark btn-sm">Back</button></a> Service complete Enquiry list</h3>
+        </div>
+        <div class="mb-3 col-md-12">
+            <div class="table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <table  class="table table-sm table-bordered">
+                <tr>
+                    <th>Action</th>
+                    <th>Sr.no</th>
+                    <th>Enquiry For</th>
+                    <th>Enquirer Name</th>
+                    <th>Enquirer Email</th>
+                    <th>Enquirer Mobile No</th>
+                    <th>Enquirer Message</th>
+                    <th>Enquirer Date</th>
+                    <th>Enquirer Time</th>
+
+
+                </tr>
+        <% for(var i=0;i<co_s_enquiry.length;i++) {     %>
+
+                    <tr>
+                        <td>
+                            <button class="btn btn-danger" onclick="confirmDelete('<%-co_s_enquiry[i].service_enquiry_id%>')" aria-label="Delete enquiry">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                            <!-- <a href="/admin/completed_service_enquiry_delete/<%-co_s_enquiry[i].service_enquiry_id%>">
+                                <button class="btn btn-primary" ></button>
+                            </a> -->
+                        </td>
+                        <td>
+                            <%= 1+i %>
+                        </td>
+                        <td>
+                            <%-co_s_enquiry[i].service_title%>
+                        </td>
+                        <td>
+                            <%-co_s_enquiry[i].name%>
+                        </td>
+                        <td>
+                            <%-co_s_enquiry[i].email%>
+                        </td>
+                        <td>
+                            <%-co_s_enquiry[i].phone%>
+                        </td>
+                        <td>
+                            <%-co_s_enquiry[i].information%>
+                        </td>
+                        <td>
+                            <%-co_s_enquiry[i].currentdate%>
+                        </td>
+                        <td>
+                            <%-co_s_enquiry[i].currenttime%>
+                        </td>
+                    </tr>
+                    <% } %>
+            </table>
+            <!-- JavaScript for Confirm Delete -->
+<script>
+    function confirmDelete(enquiryId) {
+        // Display a confirmation dialog
+        var result = confirm("Are you sure you want to delete this enquiry?");
+        
+        if (result) {
+            // If the user clicks "OK", redirect to the delete URL
+            window.location.href = '/admin/completed_service_enquiry_delete/' + enquiryId;
+        } else {
+            // If the user clicks "Cancel", do nothing (dialog closes)
+            return false;
+        }
+    }
+</script>
+            </div>
+
+            
+        <div class="col-md-12 mt-5">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    
+                    <% for(var i=1; i<=total_pages; i++) { %>
+
+                        <li class="page-item">
+                            <a class="page-link" href="/admin/completed_service_enquiry?page_no=<%=i%>">
+                                <%= i %>
+                            </a>
+                        </li>
+                        <% } %>
+
+                       
+                </ul>
+            </nav>
+        </div>
+        </div>
+
+    </div>
+</div>
+
+
+<%- include("footer.ejs") %>

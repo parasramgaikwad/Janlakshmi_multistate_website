@@ -1,0 +1,121 @@
+<%- include("navbar.ejs") %>
+
+<form action="/admin/save_happy_reviews" enctype="multipart/form-data" method="post">
+    <div class="container-fluid bg-white p-4">
+        <div class="row">
+            <div class="mb-3 col-md-12 col-sm-12 text-center">
+                <h3>Add Happy Customer Review</h3>
+            </div>
+           
+            <div class="mb-4 col-md-6 col-sm-12">
+                Customer Name
+                <input type="text" class="form-control" name="customer_name" value="" required>
+            </div>
+            <div class="mb-4 col-md-3 col-sm-12">
+                Choose  Image
+                <input type="file" name="customer_image"  class="form-control" required>
+            </div>
+            <div class="mb-4 col-md-3 col-sm-12">
+            </div>
+            <div class="mb-4 col-md-6 col-sm-12">
+                Position
+                <input type="text" class="form-control" name="customer_position" value="" required>
+            </div>
+            <div class="mb-3 col-md-6 col-sm-12">
+                Description
+                <textarea name="about_description"  class="form-control" style="height: 50px;" required>
+                
+                </textarea>
+            </div>
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary btn-lg">Save </button>
+            </div>
+        </div>
+    </div>
+</form><br><hr>
+
+<div class="container-fluid bg-white p-4">
+    <div class="row">
+        <div class="mb-3 col-md-12 text-center">
+          <h3>Branch List</h3>
+        </div>
+        <div class="mb-3 col-md-12"> 
+            <div class="table-wrapper" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+
+            <table class="table table-bordered table-stripped table-hover">
+            <tr>
+                <th style="width: 15%;" >Action</th>
+                <th>Sr</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th >Detail</th>
+                <th >Image</th>
+                
+            </tr>
+            <% for(var i=0;i<review.length;i++) { %>
+                <tr>
+                    <td>
+                        <button class="btn btn-primary" onclick="confirmEdit('<%-review[i].customer_review_id%>')" aria-label="Delete enquiry">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="confirmDelete('<%-review[i].customer_review_id%>')" aria-label="Delete enquiry">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                        <!-- <a href="/admin/edit_review/<%-review[i].customer_review_id%>" >
+                            <button class="btn btn-primary" onclick="alert('Are You Sure....?')">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </a>
+                        <a href="/admin/delete_review/<%-review[i].customer_review_id%>" >
+                            <button class="btn btn-danger" onclick="alert('Are You Sure....?')">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </a> -->
+                    </td>
+                    <td><%- i+1 %></td>
+                    <td><%-review[i].customer_name%></td>
+                    <td><%-review[i].customer_position%></td>
+                    <td><%-review[i].about_description%></td>
+                    <td>
+                        <img src="/uploads/<%-review[i].customer_image%>" style="height: 100px ;">
+                    </td>
+                    
+                    
+
+                </tr>
+            <% } %>
+            
+            </table>
+            <script>
+                function confirmDelete(enquiryId) {
+                    // Display a confirmation dialog
+                    var result = confirm("Are you sure you want to delete ?");
+                    
+                    if (result) {
+                        // If the user clicks "OK", redirect to the delete URL
+                        window.location.href = '/admin/completed_enquiry_delete/' + enquiryId;
+                    } else {
+                        // If the user clicks "Cancel", do nothing (dialog closes)
+                        return false;
+                    }
+                }
+                function confirmEdit(enquiryId) {
+                    // Display a confirmation dialog
+                    var result = confirm("Are you sure you want to edit ?");
+                    
+                    if (result) {
+                        // If the user clicks "OK", redirect to the delete URL
+                        window.location.href = '/admin/edit_review/' + enquiryId;
+                    } else {
+                        // If the user clicks "Cancel", do nothing (dialog closes)
+                        return false;
+                    }
+                }
+            </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include("footer.ejs") %>
