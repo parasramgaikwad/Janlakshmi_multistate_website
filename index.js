@@ -1,14 +1,10 @@
 var express = require("express");
 var app = express();
-
-
 var bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({ extended: true }));
-
 var upload = require("express-fileupload");
 app.use(upload());
 app.use(express.static("public/"));
-
 var session = require("express-session");
 app.use(session({
     secret: "1234554321",
